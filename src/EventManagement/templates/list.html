@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        a.create-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        a.create-btn:hover {
+            background: #2980b9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: #2c3e50;
+            color: white;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background: #ecf0f1;
+        }
+
+        .actions a {
+            margin: 0 5px;
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .actions a.edit {
+            background: #27ae60;
+            color: white;
+        }
+
+        .actions a.edit:hover {
+            background: #1e8449;
+        }
+
+        .actions a.delete {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .actions a.delete:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h1>EVENTS LIST</h1>
+    <a href="{% url 'create' %}" class="create-btn">+ Create New Event</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th> Title </th>
+                <th> Description </th>
+                <th> Date </th>
+                <th> Location </th>
+                <th> Actions </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in events %}
+            <tr>
+                <td>{{ i.title }}</td>
+                <td>{{ i.description }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.location }}</td>
+                <td class="actions">
+                    <a href="{% url 'edit' i.id %}" class="edit">EDIT</a>
+                    <a href="{% url 'delete' i.id %}" class="delete">DELETE</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
